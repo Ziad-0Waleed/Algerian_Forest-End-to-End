@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algerian Forest Fire Prediction</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; padding: 40px 20px; color: #333; }
+        .form-container { max-width: 500px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #d9534f; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input[type="number"], select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ced4da; border-radius: 5px; font-size: 14px; }
+        button { width: 100%; padding: 12px; background-color: #d9534f; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:hover { background-color: #c9302c; }
+        .result-box { margin-top: 20px; padding: 15px; text-align: center; background-color: #e2e3e5; border-radius: 5px; font-size: 18px; font-weight: bold; color: #383d41; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Forest Fire Risk Predictor</h2>
+
+    <form action="/predict" method="post">
+
+        <div class="form-group">
+            <label for="Temperature">Temperature (°C)</label>
+            <input type="number" step="any" name="Temperature" placeholder="e.g., 35" required>
+        </div>
+
+        <div class="form-group">
+            <label for="RH">Relative Humidity (%)</label>
+            <input type="number" step="any" name="RH" placeholder="e.g., 65" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Ws">Wind Speed (km/h)</label>
+            <input type="number" step="any" name="Ws" placeholder="e.g., 15" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Rain">Rain (mm)</label>
+            <input type="number" step="any" name="Rain" placeholder="e.g., 0.5" required>
+        </div>
+
+        <div class="form-group">
+            <label for="FFMC">FFMC Index</label>
+            <input type="number" step="any" name="FFMC" placeholder="e.g., 85.1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="DMC">DMC Index</label>
+            <input type="number" step="any" name="DMC" placeholder="e.g., 15.2" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ISI">ISI Index</label>
+            <input type="number" step="any" name="ISI" placeholder="e.g., 5.1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Classes">Classification</label>
+            <select name="Classes" required>
+                <option value="0">Not Fire</option>
+                <option value="1">Fire</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="Region">Region</label>
+            <select name="Region" required>
+                <option value="0">Bejaia</option>
+                <option value="1">Sidi Bel-abbes</option>
+            </select>
+        </div>
+
+        <button type="submit">Predict FWI</button>
+    </form>
+
+    {% if result is not none %}
+        <div class="result-box">
+            Predicted FWI: {{ result }}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
