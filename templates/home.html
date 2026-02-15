@@ -4,24 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algerian Forest Fire Prediction</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; padding: 40px 20px; color: #333; }
-        .form-container { max-width: 500px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #d9534f; margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
-        input[type="number"], select { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ced4da; border-radius: 5px; font-size: 14px; }
-        button { width: 100%; padding: 12px; background-color: #d9534f; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        button:hover { background-color: #c9302c; }
-        .result-box { margin-top: 20px; padding: 15px; text-align: center; background-color: #e2e3e5; border-radius: 5px; font-size: 18px; font-weight: bold; color: #383d41; }
-    </style>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
 <div class="form-container">
     <h2>Forest Fire Risk Predictor</h2>
 
-    <form action="/predict" method="post">
+    <form id="prediction-form">
 
         <div class="form-group">
             <label for="Temperature">Temperature (°C)</label>
@@ -74,16 +65,14 @@
             </select>
         </div>
 
-        <button type="submit">Predict FWI</button>
+        <button type="submit" id="submit-btn">Predict FWI</button>
     </form>
 
-    {% if result is not none %}
-        <div class="result-box">
-            Predicted FWI: {{ result }}
-        </div>
-    {% endif %}
+    <div id="result-box" class="result-box" style="display: none;"></div>
 
 </div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>
